@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMO ♡ DEEP</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #202124, #414146, #252527);
+    color: #e8c879;
+    font-family: Georgia, serif;
+    overflow: hidden;
+}
+
+/* PASSWORD SCREEN */
+#lock {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(145deg,#242426,#45454a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    padding: 20px;
+}
+
+.lock-box {
+    text-align: center;
+    padding: 40px 25px;
+    width: 100%;
+    max-width: 370px;
+    border: 1px solid #c9a75b;
+    border-radius: 22px;
+    box-shadow: 0 0 35px #c9a75b33;
+    animation: appear 1.5s ease;
+}
+
+.lock-box h1 {
+    font-size: 30px;
+    letter-spacing: 5px;
+    margin-bottom: 15px;
+    color: #e9ca80;
+}
+
+.lock-box p {
+    color: #d1c8b4;
+    margin-bottom: 25px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 30px;
+    border: 1px solid #c9a75b;
+    background: #29292c;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    outline: none;
+    letter-spacing: 3px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 35px;
+    border-radius: 30px;
+    border: 1px solid #e6c477;
+    background: linear-gradient(90deg,#b18b43,#e7cb83);
+    color: #292929;
+    font-size: 15px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px #e7cb83;
+}
+
+#error {
+    color: #ff9999;
+    margin-top: 15px;
+}
+
+/* MAIN WEBSITE */
+#main {
+    display: none;
+    min-height: 100vh;
+    text-align: center;
+    position: relative;
+    padding: 30px 15px;
+    overflow: hidden;
+}
+
+.top-title {
+    font-size: clamp(25px, 7vw, 42px);
+    letter-spacing: 5px;
+    margin-top: 30px;
+    animation: titleGlow 3s infinite alternate;
+}
+
+.heart {
+    color: #e7c879;
+}
+
+.subtitle {
+    color: #d5d0c5;
+    margin-top: 15px;
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+
+/* LOTUS */
+.lotus {
+    position: relative;
+    width: 250px;
+    height: 230px;
+    margin: 45px auto 25px;
+    animation: float 4s ease-in-out infinite;
+}
+
+.petal {
+    position: absolute;
+    width: 75px;
+    height: 125px;
+    left: 87px;
+    top: 35px;
+    border-radius: 80% 80% 35% 35%;
+    transform-origin: bottom center;
+    background: linear-gradient(to top,#9d793b,#f5d98e,#fff0bd);
+    border: 1px solid #e6c477;
+    box-shadow: 0 0 16px #d9b55b44;
+    opacity: .92;
+}
+
+.petal:nth-child(1) { transform: rotate(-65deg) scale(.8); }
+.petal:nth-child(2) { transform: rotate(-43deg) scale(.95); }
+.petal:nth-child(3) { transform: rotate(-21deg); }
+.petal:nth-child(4) { transform: rotate(0deg) scale(1.1); }
+.petal:nth-child(5) { transform: rotate(21deg); }
+.petal:nth-child(6) { transform: rotate(43deg) scale(.95); }
+.petal:nth-child(7) { transform: rotate(65deg) scale(.8); }
+
+.center {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background: radial-gradient(circle,#fff0b8,#b58b3e);
+    border-radius: 50%;
+    top: 145px;
+    left: 107px;
+    box-shadow: 0 0 25px #f5d98e;
+    z-index: 2;
+}
+
+.stem {
+    position: absolute;
+    height: 90px;
+    width: 4px;
+    background: linear-gradient(#bda05e,#64715e);
+    left: 123px;
+    top: 160px;
+}
+
+.leaf {
+    position: absolute;
+    width: 55px;
+    height: 27px;
+    border-radius: 100% 0 100% 0;
+    background: linear-gradient(45deg,#596b56,#b6a66b);
+    top: 200px;
+}
+
+.leaf.left {
+    left: 65px;
+    transform: rotate(15deg);
+}
+
+.leaf.right {
+    right: 65px;
+    transform: rotate(75deg);
+}
+
+/* TEXT */
+.message {
+    max-width: 500px;
+    margin: 20px auto;
+    color: #e6dcc5;
+    line-height: 1.9;
+    font-size: 16px;
+    animation: appear 3s ease;
+}
+
+.signature {
+    font-size: 20px;
+    letter-spacing: 3px;
+    margin-top: 25px;
+    color: #e9c878;
+}
+
+.sparkle {
+    position: absolute;
+    color: #f3d68f;
+    animation: sparkle 3s infinite;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes titleGlow {
+    from { text-shadow: 0 0 5px #c9a75b; }
+    to { text-shadow: 0 0 25px #e8c879; }
+}
+
+@keyframes sparkle {
+    0%,100% { opacity: .2; transform: scale(.7); }
+    50% { opacity: 1; transform: scale(1.5); }
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD -->
+<div id="lock">
+    <div class="lock-box">
+        <h1>LUMO <span class="heart">♡</span> DEEP</h1>
+        <p>A little world made only for you...</p>
+
+        <input type="password" id="password"
+        placeholder="Enter Secret Password">
+
+        <br>
+        <button onclick="unlock()">UNLOCK ♡</button>
+
+        <div id="error"></div>
+    </div>
+</div>
+
+<!-- WEBSITE -->
+<div id="main">
+
+    <div class="sparkle" style="top:15%;left:15%">✦</div>
+    <div class="sparkle" style="top:25%;right:15%">✧</div>
+    <div class="sparkle" style="top:65%;left:10%">✦</div>
+    <div class="sparkle" style="top:75%;right:12%">✧</div>
+
+    <h1 class="top-title">
+        LUMO <span class="heart">♡</span> DEEP
+    </h1>
+
+    <p class="subtitle">TWO SOULS • ONE BEAUTIFUL STORY</p>
+
+    <div class="lotus">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="center"></div>
+        <div class="stem"></div>
+        <div class="leaf left"></div>
+        <div class="leaf right"></div>
+    </div>
+
+    <div class="message">
+        Some flowers bloom in the sunlight,<br>
+        but some beautiful things bloom in the heart.<br><br>
+
+        Just like a lotus, may our little world<br>
+        always remain beautiful and special.<br><br>
+
+        No matter how far the stars are,<br>
+        some connections will always stay close. ♡
+    </div>
+
+    <div class="signature">
+        FOREVER WITH YOU ♡
+    </div>
+
+    <p class="subtitle" style="margin-top:20px">
+        MADE WITH LOVE • LUMO
+    </p>
+
+</div>
+
+<script>
+function unlock() {
+    const pass = document.getElementById("password").value;
+
+    if (pass === "DEEPMO") {
+        document.getElementById("lock").style.display = "none";
+        document.getElementById("main").style.display = "block";
+    } else {
+        document.getElementById("error").innerText =
+        "Wrong password! Try again, my love ♡";
+    }
+}
+
+document.getElementById("password").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") unlock();
+});
+</script>
+
+</body>
+</html>
